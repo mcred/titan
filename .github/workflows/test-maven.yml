@@ -3,13 +3,6 @@ name: CI
 on: [push]
 
 jobs:
-  setup:
-    name: Setup Environment
-    steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-java@v1 
-      with:
-        java-version: '8.0.212'
   test:
     name: Test build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -18,5 +11,9 @@ jobs:
       matrix:
         os: [ubuntu-18.04, windows-2019, macOS-10.14]
     steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-java@v1 
+      with:
+        java-version: '8.0.212'
     - name: Run Maven Tests
       run: ./mvnw clean verify
