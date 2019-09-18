@@ -3,16 +3,30 @@ name: CI
 on: [push]
 
 jobs:
-  test:
-    name: Test build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-18.04, windows-2019, macOS-10.14]
+#  test:
+#    name: Test build on ${{ matrix.os }}
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#      matrix:
+#        os: [ubuntu-18.04, macOS-10.14]
+#    steps:
+#    - uses: actions/checkout@v1
+#    - uses: actions/setup-java@v1 
+#      with:
+#        java-version: '8.0.212'
+#    - name: Run Maven Tests
+#      run: ./mvnw clean verify
+  build-windows:
+    name: build windows
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-java@v1 
-      with:
-        java-version: '8.0.212'
-    - name: Run Maven Tests
-      run: ./mvnw clean verify
+    - name: Install Graal VM
+      run: | 
+        choco install graalvm --version 19.1.0
+        SET JAVA_HOME=C:\Program Files\GraalVM\graalvm-ce-19.1.0\jre
+        SET GRAAL_BIN=C:\Program Files\GraalVM\graalvm-ce-19.1.0\bin
+        SET PATH=%GRAAL_BIN%;%PATH%
+    - name: Build Jar
+      run: ./scripts/compile-maven.sh
+      
