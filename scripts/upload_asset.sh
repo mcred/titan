@@ -8,10 +8,6 @@ FILE=$2
 
 #Upload Asset
 curl \
-  -sSL \
-  -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
-  -H "Content-Length: $(stat -c%s "$FILE")" \
   -H "Content-Type: application/zip" \
-  --upload-file "$FILE" \
-  "$UPLOAD_URL"
+  --data-binary @$FILE "$UPLOAD_URL"
