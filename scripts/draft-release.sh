@@ -9,10 +9,10 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 fi
 
 body='{
-  "tag_name": "'${1}'",
+  "tag_name": "'${GITHUB_REF}'",
   "target_commitish": "master",
-  "name": "'${1}'",
-  "body": "Draft release for '${1}'",
+  "name": "'${GITHUB_REF}'",
+  "body": "Draft release for '${GITHUB_REF}'",
   "draft": true,
   "prerelease": false
 }'
