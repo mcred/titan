@@ -23,6 +23,6 @@ UPLOADURL=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
   --data "$body" "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" |
   jq -r '.upload_url')
 
-echo UPLOADURL
+echo $UPLOADURL
 
 #Upload Assets
