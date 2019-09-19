@@ -19,7 +19,7 @@ jobs:
     - name: Build Jar
       run: ./scripts/compile-maven.sh
     - name: Compile Binary
-      run: ./scripts/build-linux.sh
+      run: ./scripts/build.sh ${{ matrix.os }}
   check:
     name: Check Releases
     runs-on: ubuntu-18.04
