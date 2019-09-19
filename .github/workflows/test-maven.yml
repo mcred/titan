@@ -29,6 +29,7 @@ jobs:
         export JAVA_HOME=${PWD}/graalvm-ce-19.0.0/Contents/Home/jre
         gu install native-image
         gu list
+        which native-image
 #    - name: Build Jar
 #      run: ./scripts/compile-maven.sh
 #    - name: Compile Binary
