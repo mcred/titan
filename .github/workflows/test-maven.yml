@@ -45,6 +45,7 @@ jobs:
         gu install native-image
         gu list
         which native-image
+        echo $PATH
 #    - name: Build Jar
 #      run: ./scripts/compile-maven.sh
     - name: Compile Binary
