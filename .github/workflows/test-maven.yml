@@ -53,8 +53,8 @@ jobs:
           files: |
             ${PWD}/releases/0.3.0/titan-cli-0.3.0-linux_amd64.zip
             ${PWD}/releases/0.3.0/titan-cli-0.3.0-darwin_amd64.zip
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #  built-osx:
 #    name: build osx
