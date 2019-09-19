@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "hi"
+
 which native-image
 
 #set -ex
