@@ -32,8 +32,8 @@ jobs:
       with:
         name: titan-cli-0.3.0-linux_amd64.zip
         path: releases/0.3.0
-  check:
-    name: Check Releases
+  release:
+    name: Release Build
     runs-on: ubuntu-18.04
     needs: build
     steps:
@@ -46,6 +46,15 @@ jobs:
           name: titan-cli-0.3.0-linux_amd64.zip
           path: releases/0.3.0
       - run: ls ${PWD}/releases/0.3.0
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ${PWD}/releases/0.3.0/titan-cli-0.3.0-linux_amd64.zip
+            ${PWD}/releases/0.3.0/titan-cli-0.3.0-darwin_amd64.zip
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #  built-osx:
 #    name: build osx
