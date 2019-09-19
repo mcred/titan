@@ -19,10 +19,10 @@ body='{
 echo $body
 
 #Draft Release
-RELEASEID=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+UPLOADURL=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
   --data "$body" "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" |
-  jq -r '.id')
+  jq -r '.upload_url')
 
-echo $RELEASEID
+echo UPLOADURL
 
 #Upload Assets
