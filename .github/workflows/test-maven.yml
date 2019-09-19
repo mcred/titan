@@ -27,6 +27,7 @@ jobs:
         gunzip -c graal.tar.gz | tar xopf -
         export PATH=${PWD}/graalvm-ce-19.0.0/Contents/Home/bin:$PATH
         export JAVA_HOME=${PWD}/graalvm-ce-19.0.0/Contents/Home/jre
+        gu install native-image
     - name: Build Jar
       run: ./scripts/compile-maven.sh
     - name: Compile Binary
