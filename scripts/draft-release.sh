@@ -27,3 +27,6 @@ RAW_URL=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
 UPLOAD_URL="${RAW_URL%/*}"
 
 echo $UPLOAD_URL
+for file in ${PWD}/releases/0.3.0/*.zip; do
+    ${PWD}/scripts/upload_asset "$UPLOAD_URL/assets?name=$(basename $file)" $file
+done

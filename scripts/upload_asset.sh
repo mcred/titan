@@ -11,7 +11,7 @@ curl \
   -sSL \
   -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
-  -H "Content-Length: $(stat -c%s "$2")" \
+  -H "Content-Length: $(stat -c%s "$FILE")" \
   -H "Content-Type: application/zip" \
-  --upload-file "$2" \
+  --upload-file "$FILE" \
   "$UPLOAD_URL"
