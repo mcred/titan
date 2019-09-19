@@ -31,7 +31,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: titan-cli-0.3.0-linux_amd64.zip
-        path:releases/0.3.0
+        path: releases/0.3.0
   check:
     name: Check Releases
     runs-on: ubuntu-18.04
