@@ -19,8 +19,8 @@ body='{
 echo $body
 
 #Draft Release
-RELEASEID=curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
+RELEASEID=$(curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
   --data "$($body)" "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases}" | \
-  python -c "import sys, json; print json.load(sys.stdin)['id']"
+  python -c "import sys, json; print json.load(sys.stdin)['id']")
 
 #Upload Assets
