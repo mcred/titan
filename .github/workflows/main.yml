@@ -31,7 +31,7 @@ jobs:
     steps:
       - name: Draft Release
         if: startsWith(github.ref, 'refs/tags/')
-        run: ${PWD}/scripts/draft-release.sh ${GITHUB_REF}
+        run: ./scripts/draft-release.sh ${GITHUB_REF}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #  release:
