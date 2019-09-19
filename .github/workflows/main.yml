@@ -26,12 +26,13 @@ jobs:
 #        name: *
 #        path: releases/0.3.0
   release:
-    name: Create Release From Tag
+    name: Draft Release
     runs-on: ubuntu-18.04
     steps:
-      - name: Create Release
+      - name: Draft Release
         if: startsWith(github.ref, 'refs/tags/')
-        run: echo ${GITHUB_REF}
+        secrets: ["GITHUB_TOKEN"]
+        run: ${PWD}/scripts/draft-release.sh ${GITHUB_REF}
 #  release:
 #    name: Release Build
 #    runs-on: ubuntu-18.04
