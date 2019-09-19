@@ -2,6 +2,8 @@
 
 echo "hi"
 
+echo $PATH
+
 which native-image
 
 #set -ex
