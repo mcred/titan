@@ -22,6 +22,6 @@ echo $body
 RELEASEID=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
   --data "$body" "https://api.github.com/repos/$GITHUB_REPOSITORY/releases")
 
-cat RELEASEID
+echo RELEASEID
 
 #Upload Assets
