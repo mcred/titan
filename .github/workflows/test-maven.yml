@@ -32,8 +32,8 @@ jobs:
         which native-image
 #    - name: Build Jar
 #      run: ./scripts/compile-maven.sh
-#    - name: Compile Binary
-#      run: ./scripts/build-osx.sh
+    - name: Compile Binary
+      run: ./scripts/build-osx.sh
 
     
     
