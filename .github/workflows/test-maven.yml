@@ -23,6 +23,7 @@ jobs:
   check:
     name: Check Releases
     runs-on: ubuntu-18.04
+    needs: build
     steps:
       - name: Check Builds
         run: ls -alh ${PWD}/releases/
