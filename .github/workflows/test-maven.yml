@@ -20,13 +20,28 @@ jobs:
       run: ./scripts/compile-maven.sh
     - name: Compile Binary
       run: ./scripts/build.sh ${{ matrix.os }}
+    - uses: actions/upload-artifact@master
+      with:
+        name: titan-cli-0.3.0-darwin_amd64.zip
+        path: ${PWD}/releases/0.3.0
+    - uses: actions/upload-artifact@master
+      with:
+        name: titan-cli-0.3.0-linux_amd64.zip
+        path: ${PWD}/releases/0.3.0
   check:
     name: Check Releases
     runs-on: ubuntu-18.04
     needs: build
     steps:
-      - name: Check Builds
-        run: ls -alh ${PWD}/releases/
+      - uses: actions/download-artifact@master
+        with:
+          name: titan-cli-0.3.0-darwin_amd64.zip
+          path: ${PWD}/releases/0.3.0
+      - uses: actions/download-artifact@master
+        with:
+          name: titan-cli-0.3.0-linux_amd64.zip
+          path: ${PWD}/releases/0.3.0
+      - run: cat ${PWD}/releases/0.3.0
 
 #  built-osx:
 #    name: build osx
