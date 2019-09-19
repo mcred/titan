@@ -45,7 +45,7 @@ jobs:
         with:
           name: titan-cli-0.3.0-linux_amd64.zip
           path: releases/0.3.0
-      - run: cat ${PWD}/releases/0.3.0
+      - run: ls ${PWD}/releases/0.3.0
 
 #  built-osx:
 #    name: build osx
