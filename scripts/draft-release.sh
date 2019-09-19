@@ -28,5 +28,5 @@ UPLOAD_URL="${RAW_URL%/*}"
 
 echo $UPLOAD_URL
 for file in ${PWD}/releases/*.zip; do
-    ${PWD}/scripts/upload_asset "$UPLOAD_URL/assets?name=$(basename $file)" $file
+    ${PWD}/scripts/upload_asset.sh "$UPLOAD_URL/assets?name=$(basename $file)" $file
 done
