@@ -45,8 +45,8 @@ jobs:
         gu install native-image
         gu list
         which native-image
-    - name: Build Jar
-      run: ./scripts/compile-maven.sh
+#    - name: Build Jar
+#      run: ./scripts/compile-maven.sh
     - name: Compile Binary
       run: /bin/bash ${PWD}/scripts/build-osx.sh 
 
