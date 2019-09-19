@@ -3,51 +3,49 @@ name: CI
 on: [push]
 
 jobs:
-#  test:
-#    name: Test build on ${{ matrix.os }}
-#    runs-on: ${{ matrix.os }}
-#    strategy:
-#      matrix:
-#        os: [ubuntu-18.04, macOS-10.14]
-#    steps:
-#    - uses: actions/checkout@v1
-#    - uses: actions/setup-java@v1 
-#      with:
-#        java-version: '8.0.212'
-#    - name: Run Maven Tests
-#      run: ./mvnw clean verify
-#  build-linux:
-#    name: build linux
-#    runs-on: ubuntu-18.04
-#    steps:
-#    - uses: actions/checkout@v1
-#    - uses: actions/setup-java@v1 
-#      with:
-#        java-version: '8.0.212'
-#    - name: Build Jar
-#      run: ./scripts/compile-maven.sh
-#    - name: Compile Binary
-#      run: ./scripts/build-linux.sh
-
-  built-osx:
-    name: build osx
-    runs-on: macOS-10.14
+  build:
+    name: Build ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, macOS-10.14]
     steps:
     - uses: actions/checkout@v1
-    - name: Install Graal VM
-      run: |
-        curl -L https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-darwin-amd64-19.0.0.tar.gz --output graal.tar.gz
-        gunzip -c graal.tar.gz | tar xopf -
-        export PATH=${PWD}/graalvm-ce-19.0.0/Contents/Home/bin:$PATH
-        export JAVA_HOME=${PWD}/graalvm-ce-19.0.0/Contents/Home/jre
-        gu install native-image
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '8.0.212'
+    - name: Setup Env
+      run: ./scripts/setup.sh ${{ matrix.os }}
     - name: Build Jar
       run: ./scripts/compile-maven.sh
     - name: Compile Binary
-      run: |
-        export PATH=${PWD}/graalvm-ce-19.0.0/Contents/Home/bin:$PATH
-        export JAVA_HOME=${PWD}/graalvm-ce-19.0.0/Contents/Home/jre
-        /bin/bash ${PWD}/scripts/build-osx.sh
+      run: ./scripts/build-linux.sh
+  check:
+    name: Check Releases
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check Builds
+        run: ls -alh ${PWD}/releases/
+
+#  built-osx:
+#    name: build osx
+#    runs-on: macOS-10.14
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Install Graal VM
+#      run: |
+#        curl -L https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-darwin-amd64-19.0.0.tar.gz --output graal.tar.gz
+#        gunzip -c graal.tar.gz | tar xopf -
+#        export PATH=${PWD}/graalvm-ce-19.0.0/Contents/Home/bin:$PATH
+#        export JAVA_HOME=${PWD}/graalvm-ce-19.0.0/Contents/Home/jre
+#        gu install native-image
+#    - name: Build Jar
+#      run: ./scripts/compile-maven.sh
+#    - name: Compile Binary
+#      run: |
+#        export PATH=${PWD}/graalvm-ce-19.0.0/Contents/Home/bin:$PATH
+#        export JAVA_HOME=${PWD}/graalvm-ce-19.0.0/Contents/Home/jre
+#        /bin/bash ${PWD}/scripts/build-osx.sh
 
 #  build-windows:
 #    name: build windows
