@@ -50,7 +50,10 @@ jobs:
 #    - name: Build Jar
 #      run: ./scripts/compile-maven.sh
     - name: Compile Binary
-      run: /bin/bash ${PWD}/scripts/build-osx.sh 
+      run: |
+        export PATH=${PWD}/graalvm-ce-19.0.0/Contents/Home/bin:$PATH
+        export JAVA_HOME=${PWD}/graalvm-ce-19.0.0/Contents/Home/jre
+        /bin/bash ${PWD}/scripts/build-osx.sh 
 
     
     
