@@ -33,7 +33,7 @@ jobs:
 #    - name: Build Jar
 #      run: ./scripts/compile-maven.sh
     - name: Compile Binary
-      run: bash ${PWD}/scripts/build-osx.sh 
+      run: /bin/bash ${PWD}/scripts/build-osx.sh 
 
     
     
