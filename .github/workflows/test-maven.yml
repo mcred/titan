@@ -16,19 +16,38 @@ jobs:
 #        java-version: '8.0.212'
 #    - name: Run Maven Tests
 #      run: ./mvnw clean verify
-  build-windows:
-    name: build windows
-    runs-on: windows-2019
+  built-osx:
+    name: build osx
+    runs-on: macOS-10.14
     steps:
     - uses: actions/checkout@v1
     - name: Install Graal VM
-      run: | 
-        choco install graalvm --version 19.1.0 maven --version 3.6.1
-        SET JAVA_HOME=C:\Program Files\GraalVM\graalvm-ce-19.1.0\jre
-        SET GRAAL_BIN=C:\Program Files\GraalVM\graalvm-ce-19.1.0\bin
-        SET PATH=%GRAAL_BIN%;%PATH%
-    - name: Install Native Image
-      run: gu install native-image
+      run |
+        curl -L https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-darwin-amd64-19.0.0.tar.gz --output graal.tar.gz
+        gunzip -c graal.tar.gz | tar xopf -
+        export PATH=${PWD}/graalvm-ce-19.0.0/Contents/Home/bin:$PATH
+        export JAVA_HOME=${PWD}/graalvm-ce-19.0.0/Contents/Home/jre
+    - name: Build Jar
+      run: ./scripts/compile-maven.sh
+    - name: Compile Binary
+      run: ./scripts/build-osx.sh
+
+    
+    
+    
+#  build-windows:
+#    name: build windows
+#    runs-on: windows-2019
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Install Graal VM
+#      run: | 
+#        choco install graalvm --version 19.1.0 maven --version 3.6.1
+#        SET JAVA_HOME=C:\Program Files\GraalVM\graalvm-ce-19.1.0\jre
+#        SET GRAAL_BIN=C:\Program Files\GraalVM\graalvm-ce-19.1.0\bin
+#        SET PATH=%GRAAL_BIN%;%PATH%
+#    - name: Install Native Image
+#      run: gu install native-image
 #    - name: Build Jar
 #      run: mvn clean package
       
