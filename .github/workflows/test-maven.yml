@@ -21,10 +21,12 @@ jobs:
     - name: Compile Binary
       run: ./scripts/build.sh ${{ matrix.os }}
     - uses: actions/upload-artifact@master
+      if: ${{ matrix.os }} == 'macOS-10.14'
       with:
         name: titan-cli-0.3.0-darwin_amd64.zip
         path: ${PWD}/releases/0.3.0
     - uses: actions/upload-artifact@master
+      if: ${{ matrix.os }} == 'ubuntu-18.04'
       with:
         name: titan-cli-0.3.0-linux_amd64.zip
         path: ${PWD}/releases/0.3.0
