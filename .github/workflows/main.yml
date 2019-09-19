@@ -29,6 +29,7 @@ jobs:
     name: Draft Release
     runs-on: ubuntu-18.04
     steps:
+      - uses: actions/checkout@v1
       - name: Draft Release
         if: startsWith(github.ref, 'refs/tags/')
         run: ./scripts/draft-release.sh
