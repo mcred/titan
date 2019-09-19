@@ -24,8 +24,6 @@ RAW_URL=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
   jq -r '.upload_url')
 
 #Prepare Upload
-PATTERN="{?name,label}"
-REPLACE=""
-UPLOAD_URL=${RAW_URL/PATTERN/REPLACE}
+UPLOAD_URL="${RAW_URL%/*}"
 
 echo $UPLOAD_URL
