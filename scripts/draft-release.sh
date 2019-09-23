@@ -8,15 +8,15 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
   exit 1
 fi
 
+RELEASE=${GITHUB_REF##*/}
 body='{
-  "tag_name": "'${GITHUB_REF}'",
+  "tag_name": "'${RELEASE}'",
   "target_commitish": "master",
-  "name": "'${GITHUB_REF}'",
-  "body": "Draft release for '${GITHUB_REF}'",
+  "name": "'${RELEASE}'",
+  "body": "Draft release for '${RELEASE}'",
   "draft": true,
   "prerelease": false
 }'
-echo $body
 
 #Draft Release
 RAW_URL=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
