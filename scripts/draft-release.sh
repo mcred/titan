@@ -18,15 +18,17 @@ body='{
 }'
 echo $body
 
+ls ${PWD}/releases
+
 #Draft Release
-RAW_URL=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
-  --data "$body" "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" |
-  jq -r '.upload_url')
+#RAW_URL=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+#  --data "$body" "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" |
+#  jq -r '.upload_url')
 
 #Prepare Upload
-UPLOAD_URL="${RAW_URL%/*}"
+#UPLOAD_URL="${RAW_URL%/*}"
 
-echo $UPLOAD_URL
-for file in ${PWD}/releases/*.zip; do
-    ${PWD}/scripts/upload_asset.sh "$UPLOAD_URL/assets?name=$(basename $file)" $file
-done
+#echo $UPLOAD_URL
+#for file in ${PWD}/releases/*.zip; do
+#    ${PWD}/scripts/upload_asset.sh "$UPLOAD_URL/assets?name=$(basename $file)" $file
+#done

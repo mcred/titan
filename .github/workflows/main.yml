@@ -46,6 +46,7 @@ jobs:
       with:
         name: titan-cli-0.3.0-linux_amd64.zip
         path: releases
+    - run: ls ${PWD}/releases/
     - name: Draft Release
       if: startsWith(github.ref, 'refs/tags/')
       run: ./scripts/draft-release.sh
