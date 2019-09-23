@@ -46,33 +46,11 @@ jobs:
       with:
         name: titan-cli-0.3.0-linux_amd64.zip
         path: releases
-    - run: ls ${PWD}/releases/
     - name: Draft Release
       if: startsWith(github.ref, 'refs/tags/')
       run: ./scripts/draft-release.sh
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-#  release:
-#    name: Release Build
-#    runs-on: ubuntu-18.04
-#    needs: build
-#    steps:
-#      - uses: actions/download-artifact@master
-#        with:
-#          name: *
-#          path: releases/0.3.0
-#      - run: ls ${PWD}/releases/0.3.0
- #     - name: Release
- #       uses: softprops/action-gh-release@v1
- #       if: startsWith(github.ref, 'refs/tags/')
- #       with:
- #         files: |
- #           ${PWD}/releases/0.3.0/titan-cli-0.3.0-linux_amd64.zip
- #           ${PWD}/releases/0.3.0/titan-cli-0.3.0-darwin_amd64.zip
- #       env:
- #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #  build-windows:
 #    name: build windows
